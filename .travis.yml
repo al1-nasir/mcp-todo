@@ -5,20 +5,13 @@ python:
 services:
   - docker
 
-before_install:
-  # ensure docker login (DOCKER_USERNAME/DOCKER_PASSWORD must be set in Travis repo settings)
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-
 install:
   - pip install -r requirements.txt
 
 script:
-  # Run unit tests first
+  # Run unit tests
   - pytest -q
 
-  # Build Docker image, tag by commit and latest
-  - IMAGE_NAME="$DOCKER_USERNAME/mcp-todo"
-  - docker build -t "$IMAGE_NAME:$TRAVIS_COMMIT" -t "$IMAGE_NAME:latest" .
-
-"
-
+  # Build Docker image (no push yet)
+  - IMAGE_NAME="mcp-todo"
+  - docker build -t "$IMAGE_NAME:test" .
