@@ -20,8 +20,5 @@ script:
   - IMAGE_NAME="$DOCKER_USERNAME/mcp-todo"
   - docker build -t "$IMAGE_NAME:$TRAVIS_COMMIT" -t "$IMAGE_NAME:latest" .
 
-after_success:
-  # Push both tags
-  - docker push "$DOCKER_USERNAME/mcp-todo:$TRAVIS_COMMIT"
-  - docker push "$DOCKER_USERNAME/mcp-todo:latest"
+"
 
